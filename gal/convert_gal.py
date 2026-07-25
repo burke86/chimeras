@@ -20,8 +20,8 @@ def ab_flux(ABmag):
     """convert AB magnitude to flux in uJy"""
     return (10**(23-(((ABmag)+48.6)/2.5))) * 1000000
 def magerr2fluxerr(mag, magerr):
-    """convert the lower (brighter) magnitude to flux, return the deviation in flux."""
-    return ab_flux(mag - magerr) - ab_flux(mag)
+    """convert a symmetric magnitude error to a flux error."""
+    return numpy.log(10) / 2.5 * ab_flux(mag) * magerr
 
 print('reading input file...')
 f = pyfits.open(sys.argv[1])

@@ -12,8 +12,8 @@ def ab_flux(ABmag):
     return (10**(23-(((ABmag)+48.6)/2.5))) * 1000000
 
 def magerr2fluxerr(mag, magerr):
-    """convert the lower (brighter) magnitude to flux, return the deviation in flux."""
-    return ab_flux(mag - magerr) - ab_flux(mag)
+    """convert a symmetric magnitude error to a flux error."""
+    return np.log(10) / 2.5 * ab_flux(mag) * magerr
 
 def convert_flux_and_err_where_measured(mag, magerr):
     """convert safely where error is positive, return nan otherwise."""
